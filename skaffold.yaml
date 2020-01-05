@@ -6,8 +6,10 @@ build:
     sha256: {}
   # defines where to find the code at build time and where to push the resulting image
   artifacts:
-  - image: frontend
-    context: src/frontend
+    - image: cartservice
+      context: src/cartservice
+    - image: frontend
+      context: src/frontend
 # defines the Kubernetes manifests to deploy on each run
 deploy:
   kubectl:
