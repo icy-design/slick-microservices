@@ -6,6 +6,8 @@ build:
     sha256: {}
   # defines where to find the code at build time and where to push the resulting image
   artifacts:
+    - image: productcatalogservice
+      context: src/productcatalogservice
     - image: cartservice
       context: src/cartservice
     - image: frontend
