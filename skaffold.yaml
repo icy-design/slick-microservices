@@ -24,6 +24,8 @@ build:
       context: src/cartservice
     - image: frontend
       context: src/frontend
+    - image: adservice
+      context: src/adservice
 # defines the Kubernetes manifests to deploy on each run
 deploy:
   kubectl:
