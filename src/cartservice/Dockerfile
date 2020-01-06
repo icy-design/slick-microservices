@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 as builder
-WORKDIR /app
+WORKDIR /src/cartservice
 COPY . .
 RUN dotnet restore && \
     dotnet build && \
-    dotnet publish -c release -r linux-musl-x64 -o /cartservice
+    dotnet publish -c release -r linux-musl-x64 -o /app/cartservice
 
 # cartservice
 FROM alpine:3.8
@@ -25,8 +25,8 @@ RUN apk add --no-cache \
     libstdc++ \
     libintl \
     icu
-WORKDIR /app
-COPY --from=builder /cartservice .
+WORKDIR /cartservice
+COPY --from=builder /app/cartservice ./server
 
 # Installing vsdbg on the container to enable debugging of .NET Core
 RUN apk add --virtual --no-cache unzip \
@@ -34,4 +34,4 @@ RUN apk add --virtual --no-cache unzip \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
 
-ENTRYPOINT ["./cartservice", "start"]
+ENTRYPOINT ["/cartservice/server", "start"]

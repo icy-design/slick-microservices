@@ -25,11 +25,12 @@ RUN go build -o /app/frontend .
 FROM alpine as release
 RUN apk add --no-cache ca-certificates \
     busybox-extras net-tools bind-tools
-WORKDIR /app/frontend
+WORKDIR /frontend
+COPY --from=builder /app/frontend ./server
 COPY ./templates ./templates
 COPY ./static ./static
 EXPOSE 8080
 
 # Start the "dlv debug" server on port 3000 of the container.
-ENTRYPOINT ["dlv", "exec", "/app/frontend", "--continue", "--accept-multiclient", "--api-version=2", "--headless", "--listen=:3000", "--log"]
-# ENTRYPOINT ["/app/frontend"]
+ENTRYPOINT ["dlv", "exec", "/frontend/sever", "--continue", "--accept-multiclient", "--api-version=2", "--headless", "--listen=:3000", "--log"]
+# ENTRYPOINT ["/frontend/sever"]
