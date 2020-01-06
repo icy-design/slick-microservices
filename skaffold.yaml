@@ -12,6 +12,8 @@ build:
       context: src/productcatalogservice
     - image: shippingservice
       context: src/shippingservice
+    - image: checkoutservice
+      context: src/checkoutservice
     - image: paymentservice
       context: src/paymentservice
     - image: currencyservice
