@@ -8,6 +8,8 @@ build:
   artifacts:
     - image: productcatalogservice
       context: src/productcatalogservice
+    - image: shippingservice
+      context: src/shippingservice
     - image: paymentservice
       context: src/paymentservice
     - image: currencyservice

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 as builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS builder
 WORKDIR /src/cartservice
 COPY . .
 RUN dotnet restore && \

@@ -1,6 +1,6 @@
-FROM node:10-alpine as base
+FROM node:10-alpine AS base
 
-FROM base as builder
+FROM base AS builder
 
 # Some packages (e.g. @google-cloud/profiler) require additional
 # deps for post-install scripts
