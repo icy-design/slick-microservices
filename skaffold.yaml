@@ -10,6 +10,8 @@ build:
       context: src/emailservice
     - image: productcatalogservice
       context: src/productcatalogservice
+    - image: recommendationservice
+      context: src/recommendationservice
     - image: shippingservice
       context: src/shippingservice
     - image: checkoutservice
