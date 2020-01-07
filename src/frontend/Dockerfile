@@ -4,6 +4,7 @@ RUN apk add --no-cache ca-certificates git && \
       wget -qO/go/bin/dep https://github.com/golang/dep/releases/download/v0.5.0/dep-linux-amd64 && \
       chmod +x /go/bin/dep
 
+ENV CGO_ENABLED 0
 ENV GO111MODULE=on
 ENV GOPROXY=https://goproxy.cn,direct
 
@@ -20,18 +21,20 @@ RUN go mod download
 COPY . .
 
 # Compile the application to /app/frontend.
-RUN go build -o /app/frontend .
+RUN go build -gcflags "all=-N -l" -o /app/frontend .
 
+# final stage
 FROM alpine AS release
-RUN apk add --no-cache ca-certificates \
+RUN apk add --no-cache ca-certificates libc6-compat \
     busybox-extras net-tools bind-tools
 
 WORKDIR /frontend
 COPY --from=builder /app/frontend ./server
+COPY --from=builder /go/bin/dlv /bin
 COPY ./templates ./templates
 COPY ./static ./static
-EXPOSE 8080
+EXPOSE 8080 3000
 
 # Start the "dlv debug" server on port 3000 of the container.
-ENTRYPOINT ["dlv", "exec", "/frontend/sever", "--continue", "--accept-multiclient", "--api-version=2", "--headless", "--listen=:3000", "--log"]
-# ENTRYPOINT ["/frontend/sever"]
+ENTRYPOINT ["dlv", "exec", "/frontend/server", "--continue", "--accept-multiclient", "--api-version=2", "--headless", "--listen=:3000", "--log"]
+# ENTRYPOINT ["/frontend/server"]
