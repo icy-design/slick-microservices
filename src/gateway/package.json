@@ -1,0 +1,52 @@
+{
+  "name": "gateway",
+  "version": "0.0.1",
+  "description": "GraphQL gateway to gRPC microservices",
+  "repository": "https://github.com/icy-design/slick-microservices",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc && copyfiles -u 1 src/**/*.graphql dist",
+    "lint": "npm run lint-prettier && npm run lint-ts",
+    "lint-ts": "tsc --noEmit && tslint --project tsconfig.json --format verbose 'src/**/*.ts'",
+    "lint-prettier": "prettier -l 'src/**/*.ts' || echo 'files are different to code formatter, run `npm run prettier` to fix'",
+    "prettier": "prettier --write 'src/**/*.ts'",
+    "watch-ts": "tsc-watch --onSuccess 'copyfiles -u 1 src/**/*.graphql dist'",
+    "nodemon": "nodemon --inspect --delay 1 --ext ts --watch src dist/index.js"
+  },
+  "author": "forafish",
+  "license": "MIT",
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.14",
+    "@graphql-modules/di": "^0.7.14",
+    "@grpc/proto-loader": "^0.5.3",
+    "apollo-datasource-grpc": "^1.0.0",
+    "apollo-datasource-rest": "^0.6.11",
+    "apollo-server": "^2.9.15",
+    "bluebird": "^3.7.2",
+    "camelcase-keys": "^6.1.1",
+    "google-protobuf": "^3.11.2",
+    "graphql": "^14.5.8",
+    "graphql-import-node": "0.0.4",
+    "graphql-playground-middleware-express": "^1.7.12",
+    "graphql-voyager": "^1.0.0-rc.28",
+    "grpc": "^1.24.2",
+    "grpc-tools": "^1.8.0",
+    "log4js": "^4.5.1",
+    "pino": "^5.15.0",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.3",
+    "@types/node": "^11.9.4",
+    "copyfiles": "^2.1.1",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "tsc-watch": "^4.0.0",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0"
+  }
+}

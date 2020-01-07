@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "semistandard *.js"
   },
-  "author": "Jonathan Lui",
+  "author": "forafish",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/debug-agent": "^4.0.1",
