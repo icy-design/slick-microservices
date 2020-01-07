@@ -31,5 +31,5 @@ COPY . .
 EXPOSE 50051
 
 # Run app.js with debugging port when container launches
-ENTRYPOINT ["node", "--inspect=9229", "server.js"]
-# ENTRYPOINT [ "node", "server.js" ]
+ENTRYPOINT ["node", "--inspect=9229", "index.js"]
+# ENTRYPOINT [ "node", "index.js" ]
