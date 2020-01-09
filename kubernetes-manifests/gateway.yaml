@@ -32,7 +32,7 @@ spec:
           - name: PORT
             value: "3000"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
-            value: "productcatalogservice:3550"
+            value: "productcatalogservice:7001"
           - name: CURRENCY_SERVICE_ADDR
             value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR

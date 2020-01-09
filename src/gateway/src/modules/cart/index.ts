@@ -6,7 +6,6 @@ import { CartProvider } from './cart.provider';
 
 export const CartModule = new GraphQLModule({
   typeDefs,
-
   resolvers,
   providers: [CartProvider]
 });
