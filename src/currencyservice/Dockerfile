@@ -25,7 +25,7 @@ WORKDIR /currencyservice
 
 COPY --from=builder /src/currencyservice/node_modules ./node_modules
 
-# Copy rest of the application csource code
+# Copy rest of the application source code
 COPY . .
 
 EXPOSE 7000

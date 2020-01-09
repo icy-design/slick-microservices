@@ -1,0 +1,20 @@
+type Query {
+  products: [Product]
+  product(id: ID!): Product!
+  searchProduct(query: String!): [Product]
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  picture: String
+  priceUsd: Money
+  categories: [String]
+}
+
+type Money {
+  currencyCode: String!
+  units: Int
+  nanos: Int
+}

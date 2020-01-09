@@ -20,12 +20,14 @@ build:
       context: src/currencyservice
     - image: cartservice
       context: src/cartservice
-    - image: frontend
-      context: src/frontend
     - image: adservice
       context: src/adservice
     - image: productcatalogservicephp
       context: src/productcatalogservicephp
+    - image: gateway
+      context: src/gateway
+    - image: frontend
+      context: src/frontend
 # defines the Kubernetes manifests to deploy on each run
 deploy:
   kubectl:
