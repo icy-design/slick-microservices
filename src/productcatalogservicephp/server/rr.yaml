@@ -1,0 +1,7 @@
+grpc:
+  listen: "tcp://:7001"
+  proto: "pb/demo.proto"
+  workers:
+    command: "php worker.php"
+    pool:
+      numWorkers: 4

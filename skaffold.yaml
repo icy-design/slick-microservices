@@ -8,8 +8,6 @@ build:
   artifacts:
     - image: emailservice
       context: src/emailservice
-    - image: productcatalogservice
-      context: src/productcatalogservice
     - image: recommendationservice
       context: src/recommendationservice
     - image: shippingservice
@@ -26,6 +24,8 @@ build:
       context: src/frontend
     - image: adservice
       context: src/adservice
+    - image: productcatalogservicephp
+      context: src/productcatalogservicephp
 # defines the Kubernetes manifests to deploy on each run
 deploy:
   kubectl:
