@@ -1,8 +1,0 @@
-syntax = "proto3";
-package service;
-
-service msx {
-    rpc Ping (Empty) returns (Empty) {
-    }
-}
-message Empty {}

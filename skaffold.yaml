@@ -22,8 +22,8 @@ build:
       context: src/cartservice
     - image: adservice
       context: src/adservice
-    - image: productcatalogservicephp
-      context: src/productcatalogservicephp
+    - image: productcatalogservice
+      context: src/productcatalogservice
     - image: gateway
       context: src/gateway
     - image: frontend

@@ -26,7 +26,7 @@ spec:
           - name: PORT
             value: "5050"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
-            value: "productcatalogservicephp:7001"
+            value: "productcatalogservice:7001"
           - name: SHIPPING_SERVICE_ADDR
             value: "shippingservice:50051"
           - name: PAYMENT_SERVICE_ADDR

@@ -29,7 +29,7 @@ spec:
         - name: PORT
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
-          value: "productcatalogservicephp:7001"
+          value: "productcatalogservice:7001"
         - name: ENABLE_PROFILER
           value: "0"
         resources:
