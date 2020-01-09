@@ -23,11 +23,6 @@ spec:
           ports:
             - name: fpm
               containerPort: 7001
-#          volumeMounts:
-#            - mountPath: /data/code
-#              name: code
-#            - mountPath: /var/log
-#              name: log
       volumes:
         - name: code
           emptyDir: {}
