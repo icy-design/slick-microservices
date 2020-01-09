@@ -1,9 +1,16 @@
-# slick-microservices
+# K8S GraphQL/gRPC Microservices Template
+
+This project is a cloud native microservices monorepo project based on [Google Hipster Shop Demo](https://github.com/GoogleCloudPlatform/microservices-demo).
+The project can serve as a startup template to utilize a modularized microservices technologies like
+Kubernetes/GKE, gRPC, GraphQL and Istio.
+
+This project is managed in a monorepo based on Skaffold/Cloud Code for easy developing and deploying. This application
+works on any Kubernetes cluster (such as a local one), as well as Google Kubernetes Engine.
 
 ## Service Architecture
 
-**Slick Shop** is composed of many microservices written in different
-languages that talk to each other over gRPC.
+The application is a web-based shop demo composed of many microservices 
+written in different languages that talk to each other via gRPC. 
 
 [![Architecture of
 microservices](./docs/img/architecture-diagram.png)](./docs/img/architecture-diagram.png)
