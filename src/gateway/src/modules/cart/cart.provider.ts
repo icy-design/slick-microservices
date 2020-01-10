@@ -29,9 +29,9 @@ export class CartProvider extends GRPCDataSource {
     return Array.isArray(response.items)? response.items.map(camelcaseKeys) : [];
   }
 
-  async emptyCart() {
+  async emptyCart(user_id: string) {
     const meta = new grpc.Metadata();
-    const response = await this.callRPC(0, { args: { }, meta, rpcName: 'EmptyCart' });
+    const response = await this.callRPC(0, { args: { user_id }, meta, rpcName: 'EmptyCart' });
     return !!response;
   }
 }
