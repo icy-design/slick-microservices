@@ -1,6 +1,6 @@
 FROM php:7.1-fpm as builder
 RUN apt-get update \
-    && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+    && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev wget \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && :\
@@ -48,11 +48,23 @@ COPY Server.php ./vendor/spiral/php-grpc/src/Server.php
 COPY etc /usr/local/etc
 COPY php.ini /usr/local/etc/phpbuster-updates
 
+RUN set -xe \
+    && export RR_VERSION=${RR_VERSION:-`wget -qO - "https://api.github.com/repos/spiral/php-grpc/releases/latest" \
+      | grep '"tag_name":' \
+      | sed -E 's/.*"v([^"]+)".*/\1/'`} \
+    && wget "https://github.com/spiral/php-grpc/releases/download/v${RR_VERSION}/rr-grpc-${RR_VERSION}-linux-amd64.tar.gz" \
+      -O /tmp/rr.tar.gz \
+    && tar zxvf /tmp/rr.tar.gz -C /tmp \
+    && mv "/tmp/rr-grpc-${RR_VERSION}-linux-amd64/rr-grpc" /usr/bin/rr \
+    && rm -Rf "/rr-grpc-${RR_VERSION}-linux-amd64" /tmp/rr.tar.gz \
+    && rr -v
+
 FROM builder
 COPY server /productcatalogservice
 WORKDIR /productcatalogservice
 RUN chmod -R 777 /productcatalogservice
 COPY --from=builder /src/productcatalog/vendor ./vendor
+COPY --from=builder /usr/bin/rr /usr/bin/rr
 ADD start.sh start.sh
 RUN chmod +x start.sh
 CMD sh start.sh
