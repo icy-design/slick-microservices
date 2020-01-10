@@ -2,17 +2,22 @@ import { ProductCatalogProvider } from './productcatalog.provider';
 
 export default {
   Query: {
-    products: async (_, __, { injector }) => {
-      return await injector.get(ProductCatalogProvider).listProducts();
+    products: async (_, __, ctx) => {
+      const { injector } = ctx;
+      return injector.get(ProductCatalogProvider).listProducts();
     },
-    product: async (_, { id }, { injector }) => {
-      return await injector.get(ProductCatalogProvider).getProduct(id);
+    product: async (_, args, ctx) => {
+      const { id } = args;
+      const { injector } = ctx;
+      return injector.get(ProductCatalogProvider).getProduct(id);
     },
-    searchProduct: async (_, { query }, { injector }) => {
-      return await injector.get(ProductCatalogProvider).searchProducts(query);
+    searchProduct: async (_, args, ctx) => {
+      const { query } = args;
+      const { injector } = ctx;
+      return injector.get(ProductCatalogProvider).searchProducts(query);
     },
   },
   Product: {
-    id: product => product._id || product.id
+    id: product => product.id
   }
 }

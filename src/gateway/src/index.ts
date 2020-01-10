@@ -5,7 +5,7 @@ import { getLogger } from 'log4js';
 import { exampleQueries } from './queries';
 import * as playground from 'graphql-playground-middleware-express';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
-import { AppModule } from './modules';
+import { AppModule } from './modules/app.module';
 
 
 const logger = getLogger('index');
