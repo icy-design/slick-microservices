@@ -42,6 +42,7 @@ RUN apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 WORKDIR /src/productcatalog
 COPY server/composer.json composer.json
+RUN composer config repo.packagist composer https://mirrors.aliyun.com/composer/
 RUN composer install
 COPY Server.php ./vendor/spiral/php-grpc/src/Server.php
 # 复制配置文件到 /usr/local
