@@ -1,5 +1,5 @@
 type Query {
-  carts: [Cart!]!
+  cart: Cart!
 }
 
 type Mutation {
@@ -8,7 +8,7 @@ type Mutation {
 }
 
 type CartItem {
-  product: Product!
+  product: Product
   quantity: Int
 }
 

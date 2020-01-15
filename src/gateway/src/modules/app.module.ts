@@ -1,12 +1,11 @@
 import { GraphQLModule } from '@graphql-modules/core';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { CartModule } from './cart/cart.module';
-import { ProductCatalogModule } from './productcatalog/productcatalog.module';
+import { UserModule } from './user';
+import { CartModule } from './cart';
+import { ProductCatalogModule } from './productcatalog';
 
-export const AppModule = new GraphQLModule({
+export const appModule = new GraphQLModule({
+  name: 'app',
   imports: [
-    AuthModule,
     UserModule,
     CartModule,
     ProductCatalogModule

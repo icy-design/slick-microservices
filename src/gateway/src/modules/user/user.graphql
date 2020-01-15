@@ -1,4 +1,15 @@
 type User {
-  id: String
+  id: ID!
   username: String
+  authToken: String
+}
+
+extend type Query {
+  me: User
+  user(id: ID!): User
+}
+
+extend type Mutation {
+  signIn(username: String!, password: String!): User
+  signUp(username: String!, password: String!, passwordConfirm: String!): User
 }

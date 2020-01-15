@@ -2,7 +2,6 @@ import GRPCDataSource from 'apollo-datasource-grpc';
 import { Injectable, ProviderScope } from '@graphql-modules/di';
 import * as grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
-import camelcaseKeys from 'camelcase-keys';
 
 const packageDefinition: any = protoLoader.loadSync(`${__dirname}/../../../proto/demo.proto`, { longs: Number });
 const hipstershop: any = grpc.loadPackageDefinition(packageDefinition).hipstershop;
@@ -17,21 +16,24 @@ export class CartProvider extends GRPCDataSource {
     this.client = client;
   }
 
-  async addItem(user_id: string, product_id: string, quantity: number) {
+  async addItem(userId: string, productId: string, quantity: number) {
     const meta = new grpc.Metadata();
-    const response = await this.callRPC(0, { args: { user_id, item: { product_id, quantity } }, meta, rpcName: 'AddItem' });
+    const response = await this.callRPC(0, { args: { userId, item: { productId, quantity } }, meta, rpcName: 'AddItem' });
     return !!response;
   }
 
-  async getCart(user_id: string) {
+  async getCart(userId: string) {
     const meta = new grpc.Metadata();
-    const response = await this.callRPC(0, { args: { user_id }, meta, rpcName: 'getCart' });
-    return Array.isArray(response.items)? response.items.map(camelcaseKeys) : [];
+    const response = await this.callRPC(0, { args: { userId }, meta, rpcName: 'GetCart' });
+    return {
+      ...response,
+      items: response.items || []
+    };
   }
 
-  async emptyCart(user_id: string) {
+  async emptyCart(userId: string) {
     const meta = new grpc.Metadata();
-    const response = await this.callRPC(0, { args: { user_id }, meta, rpcName: 'EmptyCart' });
+    const response = await this.callRPC(0, { args: { userId }, meta, rpcName: 'EmptyCart' });
     return !!response;
   }
 }

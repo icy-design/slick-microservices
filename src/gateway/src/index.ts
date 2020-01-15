@@ -1,12 +1,13 @@
 import 'reflect-metadata';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { ApolloServer } from 'apollo-server-express';
 import { getLogger } from 'log4js';
 import { exampleQueries } from './queries';
 import * as playground from 'graphql-playground-middleware-express';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
-import { AppModule } from './modules/app.module';
-
+import { appModule } from './modules/app.module';
+import cookie from 'cookie';
 
 const logger = getLogger('index');
 logger.level = 'debug';
@@ -25,11 +26,23 @@ app.get(
   }),
 );
 
+app.use(cookieParser());
 app.use('/voyager', voyagerMiddleware({ endpointUrl: `${GRAPHQL_PATH}` }));
 
 const server = new ApolloServer({
-  modules: [AppModule],
-  context: session => session
+  modules: [appModule],
+  context: session => {
+    if (session.connection) {
+      const req = session.connection.context.session.request;
+      const cookies = req.headers.cookie;
+
+      if (cookies) {
+        req.cookies = cookie.parse(cookies);
+      }
+    }
+    return appModule.context(session);
+  },
+  subscriptions: appModule.subscriptions,
 });
 server.applyMiddleware({ app, path: `${GRAPHQL_PATH}` });
 
