@@ -1,0 +1,23 @@
+type Mutation {
+  placeOrder(userCurrency: String!, address: AddressInput!, email: String!, creditCard: CreditCardInput): Order!
+}
+
+input CreditCardInput {
+  cardNumber: String!
+  cardCvv: Int!
+  expirationYear: Int!
+  expirationMonth: Int!
+}
+
+type Order {
+  orderId: ID!
+  shippingTrackingId: String!
+  shippingCost: Money!
+  shippingAddress: Address!
+  items: [OrderItem!]
+}
+
+type OrderItem {
+  item: CartItem!
+  cost: Money!
+}

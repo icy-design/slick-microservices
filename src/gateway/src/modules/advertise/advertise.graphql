@@ -1,0 +1,8 @@
+type Query {
+  ads(contextKeys: [String!]!): [Ad!]!
+}
+
+type Ad {
+  redirectUrl: String!
+  text: String
+}
