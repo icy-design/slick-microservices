@@ -8,8 +8,8 @@ type Mutation {
 }
 
 type CartItem {
-  product: Product
-  quantity: Int
+  product: Product!
+  quantity: Int!
 }
 
 type Cart {

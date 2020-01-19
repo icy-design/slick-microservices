@@ -1,0 +1,20 @@
+type Query {
+  getQuote(address: AddressInput!, items: [CartItemInput!]!): Money!
+}
+
+type Mutation {
+  shipOrder(address: AddressInput!, items: [CartItemInput!]!): String!
+}
+
+input CartItemInput {
+  productId: ID!
+  quantity: Int!
+}
+
+input AddressInput {
+  streetAddress: String!
+  city: String!
+  state: String!
+  country: String!
+  zipCode: Int!
+}

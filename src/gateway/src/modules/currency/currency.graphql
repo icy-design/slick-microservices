@@ -1,0 +1,10 @@
+type Query {
+  getCurrencies: [String!]!
+  convertCurrency(from: MoneyInput!, toCode: String!): Money
+}
+
+input MoneyInput {
+  currencyCode: String!
+  units: Int!
+  nanos: Int
+}
