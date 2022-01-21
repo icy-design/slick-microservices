@@ -36,7 +36,7 @@
     "grpc": "^1.24.2",
     "grpc-tools": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
-    "log4js": "^4.5.1",
+    "log4js": "^6.4.0",
     "only": "0.0.2",
     "pino": "^5.15.0",
     "reflect-metadata": "^0.1.13",
